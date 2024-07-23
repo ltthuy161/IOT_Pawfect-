@@ -5,7 +5,6 @@ import { ReactElement } from 'react';
 import SaleInfoCards from '../../components/dashboard/Info/SaleInfoCards';
 import Revenue from '../../components/dashboard/Info/Revenue';
 import Camera from '../../components/dashboard/Info/Camera';
-import Humid from '../../components/dashboard/Info/HumidityInfoCards';
 import { drawerWidth } from '../../layouts/main-layout';
 import HumidInfoCards from '../../components/dashboard/Info/HumidityInfoCards';
 
