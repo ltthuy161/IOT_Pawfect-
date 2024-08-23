@@ -12,15 +12,40 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+
 import signupBanner from '../../assets/authentication-banners/signup.png';
 import IconifyIcon from '../../components/base/IconifyIcon';
 import logo from '../../assets/logo/elegant-logo.png';
 import Image from '../../components/base/Image';
 
-const SignUp = (): ReactElement => {
-  const [showPassword, setShowPassword] = useState(false);
+import { UserAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
+const SignUp = (): ReactElement => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [error, setError] = useState('');
+
+  const { createUser } = UserAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("dooopoooo");
+    e.preventDefault();
+    setError('');
+    try {
+      await createUser(email, password);
+      navigate('/account');
+    } catch (e) {
+      setError((e as Error).message);
+      console.log((e as Error).message);
+    }
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
+
   return (
     <Stack
       direction="row"
@@ -35,7 +60,7 @@ const SignUp = (): ReactElement => {
         </Link>
         <Stack alignItems="center" gap={2.5} width={330} mx="auto">
           <Typography variant="h3">Signup</Typography>
-          <FormControl variant="standard" fullWidth>
+          <FormControl component="form" variant="standard" fullWidth onSubmit={handleSubmit}>
             <InputLabel shrink htmlFor="name">
               Name
             </InputLabel>
@@ -43,6 +68,8 @@ const SignUp = (): ReactElement => {
               variant="filled"
               placeholder="Enter your full name"
               id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end" sx={{ width: 16, height: 16 }}>
@@ -51,14 +78,14 @@ const SignUp = (): ReactElement => {
                 ),
               }}
             />
-          </FormControl>
-          <FormControl variant="standard" fullWidth>
             <InputLabel shrink htmlFor="email">
               Email
             </InputLabel>
             <OutlinedInput
               placeholder="Enter your email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               endAdornment={
                 <InputAdornment position="end" sx={{ width: 16, height: 16 }}>
                   <IconifyIcon icon="ic:baseline-email" width={1} height={1} />
@@ -69,8 +96,6 @@ const SignUp = (): ReactElement => {
                 backgroundColor: 'action.focus',
               }}
             />
-          </FormControl>
-          <FormControl variant="standard" fullWidth>
             <InputLabel shrink htmlFor="password">
               Password
             </InputLabel>
@@ -79,6 +104,8 @@ const SignUp = (): ReactElement => {
               placeholder="********"
               type={showPassword ? 'text' : 'password'}
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -100,12 +127,14 @@ const SignUp = (): ReactElement => {
                 ),
               }}
             />
-          </FormControl>
-          <Button variant="contained" fullWidth>
+          <Button variant="contained" fullWidth type="submit">
             Sign up
           </Button>
+
+          </FormControl>
+          {error && <Typography variant="body2" color="error">{error}</Typography>}
           <Typography variant="body2" color="text.secondary">
-            Already have an account ?{' '}
+            Already have an account?{' '}
             <Link
               href="/authentication/login"
               underline="hover"

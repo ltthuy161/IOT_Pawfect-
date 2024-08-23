@@ -1,6 +1,7 @@
 import {
   Button,
   Divider,
+  ListItem,
   ListItemIcon,
   ListItemText,
   Menu,
@@ -9,6 +10,9 @@ import {
 } from '@mui/material';
 import IconifyIcon from '../../../components/base/IconifyIcon';
 import { MouseEvent, ReactElement, useState } from 'react';
+import { UserAuth } from '../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const AccountDropdown = (): ReactElement => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -19,6 +23,17 @@ const AccountDropdown = (): ReactElement => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const navigate = useNavigate();
+  const { user, logout } = UserAuth();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/authentication/login');
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
   return (
     <>
       <Button
@@ -120,17 +135,20 @@ const AccountDropdown = (): ReactElement => {
           <ListItemIcon>
             <IconifyIcon icon="ri:logout-circle-line" color="error.main" />
           </ListItemIcon>
-          <ListItemText
-            sx={(theme) => ({
-              '& .MuiListItemText-primary': {
-                fontSize: theme.typography.body1.fontSize,
-                fontFamily: theme.typography.body1.fontFamily,
-                fontWeight: theme.typography.body1.fontWeight,
-              },
-            })}
-          >
-            Logout
-          </ListItemText>
+          <ListItem button component="a" onClick={handleLogout}>
+            <ListItemText 
+              sx={(theme) => ({
+                '& .MuiListItemText-primary': {
+                  fontSize: theme.typography.body1.fontSize,
+                  fontFamily: theme.typography.body1.fontFamily,
+                  fontWeight: theme.typography.body1.fontWeight,
+                },
+              })}
+            >
+
+              Logout
+            </ListItemText>
+          </ListItem>
         </MenuItem>
       </Menu>
     </>

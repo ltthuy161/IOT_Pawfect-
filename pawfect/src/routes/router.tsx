@@ -32,11 +32,22 @@ const Sales = lazy(async () => {
   ]).then(([moduleExports]) => moduleExports);
 });
 
+const LiveFeed = lazy(async () => {
+  return Promise.all([
+    import('../pages/home/LiveFeed'),
+    new Promise((resolve) => setTimeout(resolve, 500)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+
+const ActivityLog = lazy(async () => {
+  return Promise.all([
+    import('../pages/home/ActivityLog'),
+    new Promise((resolve) => setTimeout(resolve, 500)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+
 const Login = lazy(async () => import('../pages/authentication/Login'));
 const SignUp = lazy(async () => import('../pages/authentication/SignUp'));
-
-// const ResetPassword = lazy(async () => import('pages/authentication/ResetPassword'));
-// const ForgotPassword = lazy(async () => import('pages/authentication/ForgotPassword'));
 
 const routes: RouteObject[] = [
   {
@@ -60,6 +71,14 @@ const routes: RouteObject[] = [
             path: paths.home,
             element: <Sales />,
           },
+          {
+            path: paths.livefeed,
+            element: <LiveFeed />,
+          },
+          {
+            path: paths.activitylog,
+            element: <ActivityLog />,
+          }
         ],
       },
       {
@@ -80,14 +99,6 @@ const routes: RouteObject[] = [
             path: paths.signup,
             element: <SignUp />,
           },
-          // {
-          //   path: paths.resetPassword,
-          //   element: <ResetPassword />,
-          // },
-          // {
-          //   path: paths.forgotPassword,
-          //   element: <ForgotPassword />,
-          // },
         ],
       },
       {

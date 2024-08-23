@@ -15,10 +15,30 @@ import loginBanner from '../../assets/authentication-banners/login.png';
 import IconifyIcon from '../../components/base/IconifyIcon';
 import logo from '../../assets/logo/elegant-logo.png';
 import Image from '../../components/base/Image';
+import { UserAuth } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 const Login = (): ReactElement => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
+  const { signIn } = UserAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await signIn(email, password);
+      navigate('/')
+    } catch (e) {
+      setError((e as Error).message);
+      console.log((e as Error).message);
+    }
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   return (
@@ -35,7 +55,7 @@ const Login = (): ReactElement => {
         </Link>
         <Stack alignItems="center" gap={2.5} width={330} mx="auto">
           <Typography variant="h3">Login</Typography>
-          <FormControl variant="standard" fullWidth>
+          <FormControl component="form" variant="standard" fullWidth onSubmit={handleSubmit}>
             <InputLabel shrink htmlFor="email">
               Email
             </InputLabel>
@@ -43,6 +63,7 @@ const Login = (): ReactElement => {
               variant="filled"
               placeholder="Enter your email"
               id="email"
+              onChange={(e) => setEmail(e.target.value)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -51,8 +72,6 @@ const Login = (): ReactElement => {
                 ),
               }}
             />
-          </FormControl>
-          <FormControl variant="standard" fullWidth>
             <InputLabel shrink htmlFor="password">
               Password
             </InputLabel>
@@ -61,6 +80,7 @@ const Login = (): ReactElement => {
               placeholder="********"
               type={showPassword ? 'text' : 'password'}
               id="password"
+              onChange={(e) => setPassword(e.target.value)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -82,20 +102,10 @@ const Login = (): ReactElement => {
                 ),
               }}
             />
-          </FormControl>
-          <Typography
-            variant="body1"
-            sx={{
-              alignSelf: 'flex-end',
-            }}
-          >
-            <Link href="/authentication/forgot-password" underline="hover">
-              Forget password
-            </Link>
-          </Typography>
-          <Button variant="contained" fullWidth>
+          <Button variant="contained" fullWidth type="submit" >
             Log in
           </Button>
+          </FormControl>
           <Typography variant="body2" color="text.secondary">
             Don't have an account ?{' '}
             <Link

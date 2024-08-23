@@ -31,9 +31,9 @@ const navItems: NavItem[] = [
   },
   {
     title: 'Live Feed',
-    path: '#!',
+    path: '/pages/live-feed',
     icon: 'icomoon-free:video-camera',
-    active: false,
+    active: true,
     collapsible: false,
     sublist: [
       {
@@ -120,9 +120,9 @@ const navItems: NavItem[] = [
   },
   {
     title: 'Activity Log',
-    path: '#!',
+    path: '/pages/activity-log',
     icon: 'icomoon-free:file-text',
-    active: false,
+    active: true,
     collapsible: false,
     sublist: [
       {

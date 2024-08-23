@@ -1,10 +1,10 @@
 import { ReactElement, useRef, useState } from 'react';
 import { Box, Button, Stack, Typography, useTheme } from '@mui/material';
 import EChartsReactCore from 'echarts-for-react/lib/core';
-import RevenueChart from './RevenueChart';
+import FoodDrinkChart from './FoodDrinkChart';
 import { LineSeriesOption } from 'echarts';
 
-const Revenue = (): ReactElement => {
+const FoodDrink = (): ReactElement => {
   const theme = useTheme();
   const chartRef = useRef<EChartsReactCore | null>(null);
 
@@ -126,7 +126,7 @@ const Revenue = (): ReactElement => {
         </Stack>
       </Stack>
       <Box flex={1}>
-        <RevenueChart
+        <FoodDrinkChart
           chartRef={chartRef}
           sx={{ minHeight: 1 }}
           seriesData={seriesData}
@@ -138,4 +138,4 @@ const Revenue = (): ReactElement => {
   );
 };
 
-export default Revenue;
+export default FoodDrink;

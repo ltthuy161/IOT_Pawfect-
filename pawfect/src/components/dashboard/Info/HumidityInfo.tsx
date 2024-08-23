@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
-import { Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
-// import IconifyIcon from '../../../components/base/IconifyIcon';
+import { Card, CardContent, CardMedia, Stack, Typography, Button } from '@mui/material';
 import Image from '../../../components/base/Image';
 
 type HumidInfoProps = {
@@ -40,6 +39,7 @@ const HumidInfo = ({ image, title, value, date }: HumidInfoProps): ReactElement 
                     <Typography variant="subtitle1" component="p" minWidth={100} color="text.primary">
                         {title}
                     </Typography>
+                    
                     <Typography variant="body2" component="p" color="text.secondary">
                         {date}
                     </Typography>

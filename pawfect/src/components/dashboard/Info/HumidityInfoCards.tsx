@@ -2,7 +2,7 @@ import { Stack } from '@mui/material';
 import { HumidInfoData } from '../../../data/humid-info-data';
 import HumidInfo from './HumidityInfo';
 
-const HumidInfoCards = () => {
+const LaserInfoCards = () => {
     return (
         <Stack direction={{ xs: 'column', sm: 'row', md: 'column' }}>
             <Stack direction={{ sm: 'row' }} justifyContent={{ sm: 'space-between' }} gap={4.75}>
@@ -20,4 +20,4 @@ const HumidInfoCards = () => {
     );
 };
 
-export default HumidInfoCards;
+export default LaserInfoCards;

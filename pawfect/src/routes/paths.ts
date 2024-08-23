@@ -12,9 +12,12 @@ export const rootPaths = {
 
 export default {
   home: `/${rootPaths.homeRoot}`,
+  livefeed: `/${rootPaths.pagesRoot}/live-feed`,
+  activitylog: `/${rootPaths.pagesRoot}/activity-log`,
+  calendar: `/${rootPaths.calendarRoot}`,
+
   login: `/${rootPaths.authRoot}/login`,
   signup: `/${rootPaths.authRoot}/sign-up`,
-  resetPassword: `/${rootPaths.authRoot}/reset-password`,
-  forgotPassword: `/${rootPaths.authRoot}/forgot-password`,
+
   404: `/${rootPaths.errorRoot}/404`,
 };

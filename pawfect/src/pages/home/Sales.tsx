@@ -3,7 +3,7 @@ import { Stack } from '@mui/material';
 import { ReactElement } from 'react';
 
 import SaleInfoCards from '../../components/dashboard/Info/SaleInfoCards';
-import Revenue from '../../components/dashboard/Info/Revenue';
+import Revenue from '../../components/dashboard/Info/FoodDrink';
 import Camera from '../../components/dashboard/Info/Camera';
 import { drawerWidth } from '../../layouts/main-layout';
 import HumidInfoCards from '../../components/dashboard/Info/HumidityInfoCards';
@@ -31,7 +31,7 @@ const Sales = (): ReactElement => {
         <Revenue />
       </Grid>
       <Grid xs={12} md={4}>
-        
+
         <Stack
           direction={{ xs: 'column', sm: 'row', lg: 'column' }}
           gap={3.75}
@@ -47,7 +47,6 @@ const Sales = (): ReactElement => {
           >
 
             <Camera />
-          
           </Stack>
         </Stack>
       </Grid>

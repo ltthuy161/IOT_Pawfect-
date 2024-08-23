@@ -1,12 +1,12 @@
 import { SxProps, useTheme } from '@mui/material';
-import ReactEchart from '../../../components/base/ReactEchart';
+import ReactEchart from '../../base/ReactEchart';
 import * as echarts from 'echarts';
 import EChartsReactCore from 'echarts-for-react/lib/core';
 import { LineSeriesOption } from 'echarts';
 import { useMemo } from 'react';
 import { EChartsOption } from 'echarts-for-react';
 
-type RevenueChartProps = {
+type FoodDrinkChartProps = {
   chartRef: React.MutableRefObject<EChartsReactCore | null>;
   seriesData?: LineSeriesOption[];
   legendData?: any;
@@ -14,7 +14,7 @@ type RevenueChartProps = {
   sx?: SxProps;
 };
 
-const RevenueChart = ({ chartRef, seriesData, legendData, colors, ...rest }: RevenueChartProps) => {
+const FoodDrinkChart = ({ chartRef, seriesData, legendData, colors, ...rest }: FoodDrinkChartProps) => {
   const theme = useTheme();
 
   const option: EChartsOption = useMemo(
@@ -87,4 +87,4 @@ const RevenueChart = ({ chartRef, seriesData, legendData, colors, ...rest }: Rev
   return <ReactEchart ref={chartRef} echarts={echarts} option={option} {...rest} />;
 };
 
-export default RevenueChart;
+export default FoodDrinkChart;
